@@ -1,5 +1,5 @@
 export async function fetchAllTasks() {
-  const response = await fetch("http://localhost:3000/api/tasks", {
+  const response = await fetch("/api/tasks", {
     cache: "no-store",
     next: {
       revalidate: 10,
@@ -10,7 +10,7 @@ export async function fetchAllTasks() {
 }
 
 export async function fetchTaskById(id) {
-  const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+  const response = await fetch(`/api/tasks/${id}`, {
     cache: "no-store",
   });
 
@@ -19,7 +19,7 @@ export async function fetchTaskById(id) {
 
 export async function postTask(data) {
   try {
-    const response = await fetch("http://localhost:3000/api/tasks", {
+    const response = await fetch("/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,16 +39,13 @@ export async function postTask(data) {
 
 export async function updateTask(data) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/tasks/${data._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`/api/tasks/${data._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
     if (response.ok) {
       return response.json();
@@ -62,7 +59,7 @@ export async function updateTask(data) {
 
 export async function changeStatus(data) {
   try {
-    await fetch(`http://localhost:3000/api/changeStatus/${data._id}`, {
+    await fetch(`/api/changeStatus/${data._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +72,7 @@ export async function changeStatus(data) {
 }
 
 export async function deleteTask(id) {
-  await fetch(`http://localhost:3000/api/tasks/${id}`, {
+  await fetch(`/api/tasks/${id}`, {
     method: "DELETE",
     "Content-Type": "application/json",
   });
